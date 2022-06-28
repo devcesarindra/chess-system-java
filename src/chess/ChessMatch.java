@@ -28,9 +28,12 @@ public class ChessMatch {
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         Piece capturedPiece = makeMovie(source, target);
         return (ChessPiece) capturedPiece;
     }
+
+
 
     private Piece makeMovie(Position source, Position target) {
         Piece p = board.removePiece(source);
@@ -44,6 +47,12 @@ public class ChessMatch {
         }
         if(!board.piece(position).isThereAnyPossibleMovie()) {
             throw new ChessException("There is no possible movies for chosen piece");
+        }
+    }
+
+    private void validateTargetPosition(Position source, Position target) {
+        if(!board.piece(source).possibleMovie(target)) {
+            throw new ChessException("The piece chosen can't move to target position");
         }
     }
     private void placeNewPiece(char collum, int row, ChessPiece piece) {
