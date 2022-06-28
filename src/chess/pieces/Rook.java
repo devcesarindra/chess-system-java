@@ -22,4 +22,10 @@ public class Rook extends ChessPiece {
     public String toString() {
         return "T";
     }
+
+    @Override
+    public boolean[][] possibleMovies() {
+        boolean [][] mat = new boolean[getBoard().getRows()][getBoard().getCollums()];
+        return mat;
+    }
 }
