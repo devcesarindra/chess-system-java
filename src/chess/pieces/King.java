@@ -9,14 +9,6 @@ public class King extends ChessPiece {
         super(board, color);
     }
 
-//    @Override
-//    public String toString() {
-//        if (getColor() == Color.BLACK) {
-//            return "♔";
-//        } else {
-//            return "♚";
-//        }
-//    }
     @Override
     public String toString() {
         return "R";

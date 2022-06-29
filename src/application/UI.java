@@ -17,7 +17,7 @@ public class UI {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_WHITE = "\033[1;97m";
 
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
@@ -26,7 +26,9 @@ public class UI {
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_GRAY = "\033[1;90m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    private static boolean alterColorBoard = false;
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -48,10 +50,13 @@ public class UI {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], false);
+                if(i == 8 || j == 7) {
+                    alterColorBoard = !alterColorBoard;
+                }
             }
             System.out.println();
         }
-        System.out.println("   A   B   C   D   E   F   G   H");
+        System.out.println("   A  B  C  D  E  F  G  H");
     }
 
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMovies)  {
@@ -62,22 +67,38 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println("   A   B   C   D   E   F   G   H");
+        System.out.println("   A   B   C   D   E   F   G   H");
     }
 
     private static void printPiece(ChessPiece piece, boolean background) {
-        if(background) {
-            System.out.print(ANSI_BLUE_BACKGROUND);
-        }
         if (piece == null) {
-            System.out.print(" - " + ANSI_RESET);
+            if(background) {
+                System.out.print(ANSI_BLUE_BACKGROUND+ "   " + ANSI_RESET);
+            } else {
+                if (alterColorBoard)  {
+                    System.out.print(ANSI_WHITE_BACKGROUND+"   " + ANSI_RESET);
+                    alterColorBoard = false;
+                } else {
+                    System.out.print(ANSI_BLACK_BACKGROUND+ "   " + ANSI_RESET);
+                    alterColorBoard = true;
+                }
+            }
         } else {
             if(piece.getColor() == Color.BLACK) {
-                System.out.print(" " + ANSI_RED +piece+ ANSI_RESET + " ");
+                if(alterColorBoard) {
+                    System.out.print(ANSI_WHITE_BACKGROUND+" "+ANSI_GRAY+piece+ " "+ ANSI_RESET );
+                } else {
+                    System.out.print(ANSI_BLACK_BACKGROUND+" "+ANSI_GRAY+piece+ " "+ ANSI_RESET );
+                }
+                alterColorBoard = !alterColorBoard;
             } else {
-                System.out.print(" " + ANSI_GREEN +piece+ ANSI_RESET + " ");
+                if(alterColorBoard) {
+                    System.out.print(ANSI_WHITE_BACKGROUND+" "+ ANSI_WHITE+piece + " "+ ANSI_RESET);
+                } else {
+                    System.out.print(ANSI_BLACK_BACKGROUND+" "+ ANSI_WHITE+piece+ " "+ ANSI_RESET );
+                }
+                alterColorBoard = !alterColorBoard;
             }
         }
-        System.out.print(" ");
     }
 }
