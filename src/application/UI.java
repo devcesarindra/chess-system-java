@@ -50,9 +50,10 @@ public class UI {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], false);
+                alterColorBoard = !alterColorBoard;
                 if(i == 8 || j == 7) {
                     alterColorBoard = !alterColorBoard;
-                }
+                };
             }
             System.out.println();
         }
@@ -64,10 +65,14 @@ public class UI {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], possibleMovies[i][j]);
+                alterColorBoard = !alterColorBoard;
+                if(i == 8 || j == 7) {
+                    alterColorBoard = !alterColorBoard;
+                };
             }
             System.out.println();
         }
-        System.out.println("   A   B   C   D   E   F   G   H");
+        System.out.println("   A  B  C  D  E  F  G  H");
     }
 
     private static void printPiece(ChessPiece piece, boolean background) {
@@ -77,10 +82,8 @@ public class UI {
             } else {
                 if (alterColorBoard)  {
                     System.out.print(ANSI_WHITE_BACKGROUND+"   " + ANSI_RESET);
-                    alterColorBoard = false;
                 } else {
                     System.out.print(ANSI_BLACK_BACKGROUND+ "   " + ANSI_RESET);
-                    alterColorBoard = true;
                 }
             }
         } else {
@@ -90,14 +93,12 @@ public class UI {
                 } else {
                     System.out.print(ANSI_BLACK_BACKGROUND+" "+ANSI_GRAY+piece+ " "+ ANSI_RESET );
                 }
-                alterColorBoard = !alterColorBoard;
             } else {
                 if(alterColorBoard) {
                     System.out.print(ANSI_WHITE_BACKGROUND+" "+ ANSI_WHITE+piece + " "+ ANSI_RESET);
                 } else {
                     System.out.print(ANSI_BLACK_BACKGROUND+" "+ ANSI_WHITE+piece+ " "+ ANSI_RESET );
                 }
-                alterColorBoard = !alterColorBoard;
             }
         }
     }
