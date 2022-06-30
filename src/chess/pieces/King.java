@@ -12,7 +12,7 @@ public class King extends ChessPiece {
 
     @Override
     public String toString() {
-        return "R";
+        return "♚";
     }
     private boolean canMovie(Position position) {
         ChessPiece p = (ChessPiece) getBoard().piece(position);

@@ -77,7 +77,7 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println("   A  B  C  D  E  F  G  H");
+        System.out.println("  ㅤAㅤ Bㅤ Cㅤ Dㅤ  Eㅤ Fㅤ Gㅤ H");
     }
 
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMovies)  {
@@ -92,18 +92,18 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println("   A  B  C  D  E  F  G  H");
+        System.out.println("  ㅤAㅤ Bㅤ Cㅤ Dㅤ Eㅤ Fㅤ Gㅤ H");
     }
 
     private static void printPiece(ChessPiece piece, boolean background) {
         if (piece == null) {
             if(background) {
-                System.out.print(ANSI_BLUE_BACKGROUND+ "   " + ANSI_RESET);
+                System.out.print(ANSI_BLUE_BACKGROUND+ "ㅤㅤ " + ANSI_RESET);
             } else {
                 if (alterColorBoard)  {
-                    System.out.print(ANSI_WHITE_BACKGROUND+"   " + ANSI_RESET);
+                    System.out.print(ANSI_WHITE_BACKGROUND+"ㅤㅤ " + ANSI_RESET);
                 } else {
-                    System.out.print(ANSI_BLACK_BACKGROUND+ "   " + ANSI_RESET);
+                    System.out.print(ANSI_BLACK_BACKGROUND+ "ㅤㅤ " + ANSI_RESET);
                 }
             }
         } else {
